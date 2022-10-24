@@ -51,8 +51,7 @@ public class JavaBasicsSpec {
     }
 
     @Test
-        // 1. Dodaj do sekcji 'when` linijkę `user.setSurname("Placek");` Czy test przejdzie?
-        // 2. Popraw asercję w sekcji 'then' tak aby test przechodził
+        // Zmieniając sekcje 'when' spraw aby test przeszedł
     void mutabilityProblem() {
         //given
         User user = new User("Jacek", "Kowalski");
@@ -61,7 +60,7 @@ public class JavaBasicsSpec {
         //when
 
         //then
-        assertEquals(userManager.introduceUser(), "Hello!, I'm Jacek Kowalski");
+        assertEquals(userManager.introduceUser(), "Hello!, I'm Jacek Placek");
     }
 
     @Test
