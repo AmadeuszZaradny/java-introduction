@@ -1,4 +1,4 @@
-package pl.umk.workshop.javaintroduction.first;
+package pl.umk.workshop.javaintroduction;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +33,7 @@ public class JavaBasicsSpec {
         }
 
         //then
-        assertEquals(userMap.size(), 100);
+        assertEquals(100, userMap.size());
     }
 
     @Test
@@ -46,8 +46,8 @@ public class JavaBasicsSpec {
         //when
 
         //then
-        assertEquals(user.getName(), "Jacek");
-        assertEquals(user.getSurname(), "Placek");
+        assertEquals("Jacek", user.getName());
+        assertEquals("Placek", user.getSurname());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class JavaBasicsSpec {
         //when
 
         //then
-        assertEquals(userManager.introduceUser(), "Hello!, I'm Jacek Placek");
+        assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class JavaBasicsSpec {
         setNameUsingMagic(user);
 
         //then
-        assertEquals(userManager.introduceUser(), "Hello!, I'm Jacek Kowalski");
+        assertEquals("Hello!, I'm Jacek Kowalski", userManager.introduceUser());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class JavaBasicsSpec {
         userManager = new UserManager(user);
 
         //then
-        assertEquals(userManager.introduceUser(), "Hello!, I'm Jacek Placek");
+        assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
     }
 
     @Test()
@@ -106,17 +106,17 @@ public class JavaBasicsSpec {
 //        PlatformFacade platformFacade = new PlatformFacade();
 
         //expect
-//        assertEquals(platformFacade.buyOffer(client, "offer-id"), "You bought an offer: offer-id");
-//        assertEquals(platformFacade.buyOffer(seller, "offer-id"), "You bought an offer: offer-id");
-//        assertEquals(platformFacade.buyOffer(admin, "offer-id"), "You bought an offer: offer-id");
+//        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(client, "offer-id"));
+//        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(seller, "offer-id"));
+//        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(admin, "offer-id"));
 //
 //        assertThrows(NotAllowedOperationException.class, () -> platformFacade.listOffer(client, "offer-id"));
-//        assertEquals(platformFacade.listOffer(seller, "offer-id"), "You sold an offer: offer-id");
-//        assertEquals(platformFacade.listOffer(admin, "offer-id"), "You sold an offer: offer-id");
+//        assertEquals("You sold an offer: offer-id", platformFacade.listOffer(seller, "offer-id"));
+//        assertEquals("You sold an offer: offer-id", platformFacade.listOffer(admin, "offer-id"));
 //
 //        assertThrows(NotAllowedOperationException.class, () -> platformFacade.doMagicWithOffer(client, "offer-id"));
 //        assertThrows(NotAllowedOperationException.class, () -> platformFacade.doMagicWithOffer(seller, "offer-id"));
-//        assertEquals(platformFacade.doMagicWithOffer(admin, "offer-id"), "You cast a spell on an offer: offer-id");
+//        assertEquals("You cast a spell on an offer: offer-id", platformFacade.doMagicWithOffer(admin, "offer-id"));
     }
 
     private void setNameUsingMagic(User user) {

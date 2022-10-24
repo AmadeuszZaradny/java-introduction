@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -51,12 +52,12 @@ public class StreamsSpec {
         var result = emptyList();
 
         //then
-        assertEquals(result, asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20));
+        assertEquals(asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20), result);
     }
 
     @Test
         // Wybierz imiona, których długość jest nieparzysta oraz posortuj je od najkrótszego do najdłużeszego
-    void nameSorting() {
+    void namesSorting() {
         //given
         var names = asList("Amadeusz", "Mateusz", "Jakub", "Patryk", "Dominik");
 
@@ -64,7 +65,7 @@ public class StreamsSpec {
         var result = names;
 
         //then
-        assertEquals(result, asList("Jakub", "Mateusz", "Dominik"));
+        assertEquals(asList("Jakub", "Mateusz", "Dominik"), result);
     }
 
     @Test
@@ -76,13 +77,12 @@ public class StreamsSpec {
         var names = asList("Monika", "Jakub", "Mateusz", "Dorota", "Julia", "Mieszko");
 
         //when
-        var result = names.stream()
-                .collect(Collectors.groupingBy(e -> e.charAt(0)));
+        var result = emptyMap();
 
         //then
-        assertEquals(result.get('M'), asList("Monika", "Mateusz", "Mieszko"));
-        assertEquals(result.get('J'), asList("Jakub", "Julia"));
-        assertEquals(result.get('D'), asList("Dorota"));
+        assertEquals(asList("Monika", "Mateusz", "Mieszko"), result.get('M'));
+        assertEquals(asList("Jakub", "Julia"), result.get('J'));
+        assertEquals(asList("Dorota"), result.get('D'));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class StreamsSpec {
         var result = integers;
 
         //then
-        assertEquals(result, 55);
+        assertEquals(55, result);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class StreamsSpec {
         var integers = emptyList();
 
         //expect
-        assertEquals(integers, asList(0, 6, 12, 18, 24, 30, 36, 42, 48, 54));
+        assertEquals(asList(0, 6, 12, 18, 24, 30, 36, 42, 48, 54), integers);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class StreamsSpec {
         var integer = emptyList();
 
         //then
-        assertEquals(integer, 2470);
+        assertEquals(2470, integer);
     }
 
     @Test
@@ -131,7 +131,7 @@ public class StreamsSpec {
         var result = names;
 
         //then
-        assertEquals(result, asList("Michał Wiśniewski", "Zenek Martyniuk", "Maryla Rodowicz", "Ryszard Andrzejewski"));
+        assertEquals(asList("Michał Wiśniewski", "Zenek Martyniuk", "Maryla Rodowicz", "Ryszard Andrzejewski"), result);
     }
 
     @Test
@@ -141,6 +141,6 @@ public class StreamsSpec {
         var primeNumbers = emptyList();
 
         //then
-        assertEquals(primeNumbers, asList(0, 1, 2, 3, 5, 7, 11, 13, 17, 19));
+        assertEquals(asList(0, 1, 2, 3, 5, 7, 11, 13, 17, 19), primeNumbers);
     }
 }

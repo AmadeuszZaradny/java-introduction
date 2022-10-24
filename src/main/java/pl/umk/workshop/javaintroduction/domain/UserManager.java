@@ -2,7 +2,7 @@ package pl.umk.workshop.javaintroduction.domain;
 
 import pl.umk.workshop.javaintroduction.domain.models.User;
 
-final public class UserManager {
+public final class UserManager {
 
     private final User user;
 
