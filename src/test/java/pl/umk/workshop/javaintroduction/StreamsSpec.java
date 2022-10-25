@@ -3,7 +3,11 @@ package pl.umk.workshop.javaintroduction;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -22,7 +26,10 @@ public class StreamsSpec {
         var elements = asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         //when
-        var result = elements;
+        var result = elements.stream()
+                .skip(3)
+                .limit(4)
+                .toList();
 
         //then
         assertEquals(result, asList(4, 5, 6, 7));
@@ -30,12 +37,13 @@ public class StreamsSpec {
 
     @Test
         // Zmien pierwszą litere każdego imienia na wielką
+        // .map((element)-> element.doSomething())
     void uppercase() {
         //given
         var names = asList("amadeusz", "jakub", "patryk", "mateusz", "dominik");
 
         //when
-        var result = names;
+        var result = names.stream().map(t -> t.substring(0, 1).toUpperCase() + t.substring(1)).toList();
 
         //then
         assertEquals(result, asList("Amadeusz", "Jakub", "Patryk", "Mateusz", "Dominik"));
@@ -49,7 +57,7 @@ public class StreamsSpec {
         var secondList = asList(2, 4, 6, 8, 10, 12, 14, 16, 18, 20);
 
         //when
-        var result = emptyList();
+        var result = Stream.concat(firstList.stream(), secondList.stream()).distinct().toList();
 
         //then
         assertEquals(asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20), result);
@@ -62,7 +70,10 @@ public class StreamsSpec {
         var names = asList("Amadeusz", "Mateusz", "Jakub", "Patryk", "Dominik");
 
         //when
-        var result = names;
+        var result = names.stream()
+                .filter(element -> element.length() % 2 == 1)
+                .sorted(Comparator.comparing(String::length))
+                .toList();
 
         //then
         assertEquals(asList("Jakub", "Mateusz", "Dominik"), result);
@@ -77,7 +88,8 @@ public class StreamsSpec {
         var names = asList("Monika", "Jakub", "Mateusz", "Dorota", "Julia", "Mieszko");
 
         //when
-        var result = emptyMap();
+        var result = names.stream()
+                .collect(Collectors.groupingBy(element -> element.charAt(0)));
 
         //then
         assertEquals(asList("Monika", "Mateusz", "Mieszko"), result.get('M'));
@@ -92,7 +104,10 @@ public class StreamsSpec {
         var integers = asList(asList(1, 2, 3), asList(4, 5, 6), asList(7, 8, 9, 10));
 
         // when
-        var result = integers;
+        var result = integers.stream()
+                .flatMap(Collection::stream)
+                .reduce(Integer::sum)
+                .orElse(0);
 
         //then
         assertEquals(55, result);

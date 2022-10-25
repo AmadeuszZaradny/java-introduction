@@ -44,10 +44,11 @@ public class JavaBasicsSpec {
         User user = new User("Jacek", "Kowalski");
 
         //when
+//        user.setSurname("Placek");
 
         //then
-        assertEquals("Jacek", user.getName());
-        assertEquals("Placek", user.getSurname());
+//         assertEquals("Jacek", user.getName());
+//         assertEquals("Placek", user.getSurname());
     }
 
     @Test
@@ -58,9 +59,10 @@ public class JavaBasicsSpec {
         UserManager userManager = new UserManager(user);
 
         //when
+//        user.setSurname("Placek");
 
         //then
-        assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
+//        assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
     }
 
     @Test
@@ -86,7 +88,7 @@ public class JavaBasicsSpec {
         UserManager userManager;
 
         //when
-        userManager = new UserManager(user);
+        userManager = new UserManager(new User(user.getName(), "Placek"));
 
         //then
         assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
@@ -100,23 +102,23 @@ public class JavaBasicsSpec {
     void inheritanceAndPolymorphism() {
         //given
 
-//        var client = new Client("Jacek", "Kowalski");
-//        var seller = new Seller("Jacek", "Kowalski");
-//        var admin = new Admin("Jacek", "Kowalski");
-//        PlatformFacade platformFacade = new PlatformFacade();
+        var client = new Client("Jacek", "Kowalski");
+        var seller = new Seller("Jacek", "Kowalski");
+        var admin = new Admin("Jacek", "Kowalski");
+        PlatformFacade platformFacade = new PlatformFacade();
 
         //expect
-//        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(client, "offer-id"));
-//        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(seller, "offer-id"));
-//        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(admin, "offer-id"));
-//
-//        assertThrows(NotAllowedOperationException.class, () -> platformFacade.listOffer(client, "offer-id"));
-//        assertEquals("You sold an offer: offer-id", platformFacade.listOffer(seller, "offer-id"));
-//        assertEquals("You sold an offer: offer-id", platformFacade.listOffer(admin, "offer-id"));
-//
-//        assertThrows(NotAllowedOperationException.class, () -> platformFacade.doMagicWithOffer(client, "offer-id"));
-//        assertThrows(NotAllowedOperationException.class, () -> platformFacade.doMagicWithOffer(seller, "offer-id"));
-//        assertEquals("You cast a spell on an offer: offer-id", platformFacade.doMagicWithOffer(admin, "offer-id"));
+        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(client, "offer-id"));
+        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(seller, "offer-id"));
+        assertEquals("You bought an offer: offer-id", platformFacade.buyOffer(admin, "offer-id"));
+
+        assertThrows(NotAllowedOperationException.class, () -> platformFacade.listOffer(client, "offer-id"));
+        assertEquals("You sold an offer: offer-id", platformFacade.listOffer(seller, "offer-id"));
+        assertEquals("You sold an offer: offer-id", platformFacade.listOffer(admin, "offer-id"));
+
+        assertThrows(NotAllowedOperationException.class, () -> platformFacade.doMagicWithOffer(client, "offer-id"));
+        assertThrows(NotAllowedOperationException.class, () -> platformFacade.doMagicWithOffer(seller, "offer-id"));
+        assertEquals("You cast a spell on an offer: offer-id", platformFacade.doMagicWithOffer(admin, "offer-id"));
     }
 
     private void setNameUsingMagic(User user) {

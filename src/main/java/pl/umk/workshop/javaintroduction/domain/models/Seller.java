@@ -1,7 +1,18 @@
 package pl.umk.workshop.javaintroduction.domain.models;
 
-public final class Seller {
+public final class Seller extends User {
 
-    public Seller() {
+    public Seller(String name, String surname) {
+        super(name, surname);
+    }
+
+    @Override
+    public boolean hasSellingAbility() {
+        return true;
+    }
+
+    @Override
+    public boolean hasBuyingAbility() {
+        return true;
     }
 }
