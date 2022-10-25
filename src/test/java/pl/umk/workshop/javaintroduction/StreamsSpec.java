@@ -5,13 +5,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -118,7 +117,12 @@ public class StreamsSpec {
         // Tip: Zerknij na IntStream
     void integersStreams() {
         //given
-        var integers = emptyList();
+        var integers = IntStream
+                .generate(new AtomicInteger()::getAndIncrement)
+                .limit(10)
+                .boxed()
+                .map(element -> element * 6)
+                .toList();
 
         //expect
         assertEquals(asList(0, 6, 12, 18, 24, 30, 36, 42, 48, 54), integers);
@@ -128,7 +132,13 @@ public class StreamsSpec {
         // Policz sumę kwadratów pierwszych 20 kolejnych liczb naturalnych
     void sumOfSquares() {
         //given
-        var integer = emptyList();
+        var integer = IntStream
+                .generate(new AtomicInteger()::getAndIncrement)
+                .limit(20)
+                .boxed()
+                .map(element -> element * element)
+                .reduce(Integer::sum)
+                .get();
 
         //then
         assertEquals(2470, integer);
@@ -143,7 +153,12 @@ public class StreamsSpec {
         var surnames = asList("Wiśniewski", "Martyniuk", "Rodowicz", "Andrzejewski");
 
         // when
-        var result = names;
+        var result = IntStream
+                .generate(new AtomicInteger()::getAndIncrement)
+                .limit(names.size())
+                .boxed()
+                .map(iterator -> String.format("%s %s", names.get(iterator), surnames.get(iterator)))
+                .toList();
 
         //then
         assertEquals(asList("Michał Wiśniewski", "Zenek Martyniuk", "Maryla Rodowicz", "Ryszard Andrzejewski"), result);
@@ -153,9 +168,18 @@ public class StreamsSpec {
         // Wygeneruj listę pierwszych 10 liczb pierwszych
     void primeNumbers() {
         //given
-        var primeNumbers = emptyList();
+        var primeNumbers = IntStream
+                .generate(new AtomicInteger()::getAndIncrement)
+                .filter(StreamsSpec::isPrime)
+                .limit(10)
+                .boxed()
+                .toList();
 
         //then
         assertEquals(asList(0, 1, 2, 3, 5, 7, 11, 13, 17, 19), primeNumbers);
+    }
+
+    public static boolean isPrime(int number) {
+        return IntStream.rangeClosed(2, number/2).noneMatch(i -> number%i == 0);
     }
 }
