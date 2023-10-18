@@ -1,12 +1,13 @@
 package pl.umk.workshop.javaintroduction.domain;
 
-import pl.umk.workshop.javaintroduction.domain.models.User;
 
-public final class UserManager {
+import pl.umk.workshop.javaintroduction.domain.models.ImmutableUser;
 
-    private final User user;
+public final class ImmutableUserManager {
 
-    public UserManager(User user) {
+    private final ImmutableUser user;
+
+    public ImmutableUserManager(ImmutableUser user) {
         this.user = user;
     }
 
