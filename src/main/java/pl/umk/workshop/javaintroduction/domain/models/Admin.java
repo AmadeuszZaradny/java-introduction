@@ -1,6 +1,6 @@
 package pl.umk.workshop.javaintroduction.domain.models;
 
-public final class Admin extends User{
+public final class Admin extends ImmutableUser{
 
     public Admin(String name, String surname) {
         super(name, surname);

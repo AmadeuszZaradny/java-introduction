@@ -2,12 +2,12 @@ package pl.umk.workshop.javaintroduction.domain.models;
 
 import java.util.Objects;
 
-public class User extends PlatformUser {
+public class ImmutableUser extends PlatformUser {
 
-    private final String name;
-    private final String surname;
+    final private String name;
+    final private String surname;
 
-    public User(String name, String surname) {
+    public ImmutableUser(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
@@ -20,22 +20,9 @@ public class User extends PlatformUser {
         return surname;
     }
 
-    /*
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-     */
-
     @Override
     public String toString() {
-        return "Student{" +
+        return "ImmutableUser{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
@@ -45,8 +32,8 @@ public class User extends PlatformUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
+        ImmutableUser that = (ImmutableUser) o;
+        return Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
     }
 
     @Override

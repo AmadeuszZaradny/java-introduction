@@ -1,6 +1,6 @@
 package pl.umk.workshop.javaintroduction.domain.models;
 
-public final class Client extends User {
+public final class Client extends ImmutableUser {
 
     public Client(String name, String surname) {
         super(name, surname);

@@ -3,10 +3,7 @@ package pl.umk.workshop.javaintroduction;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.umk.workshop.javaintroduction.domain.*;
-import pl.umk.workshop.javaintroduction.domain.models.Admin;
-import pl.umk.workshop.javaintroduction.domain.models.Client;
-import pl.umk.workshop.javaintroduction.domain.models.Seller;
-import pl.umk.workshop.javaintroduction.domain.models.User;
+import pl.umk.workshop.javaintroduction.domain.models.*;
 import pl.umk.workshop.javaintroduction.domain.models.exceptions.NotAllowedOperationException;
 
 import java.lang.reflect.Field;
@@ -16,20 +13,20 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// Zadania są od siebie zależne. Należy wykonywac je w kolejnosci
+// Zadania są od siebie zależne. Należy wykonywac je w kolejnosci.
 @SpringBootTest
 public class JavaBasicsSpec {
 
     @Test
-        // Zmien klasę User tak aby test przechodził
+        // Zmien klasę MutableUser tak aby test przechodził
         // Tip: HashMap korzysta z metody hashCode oraz equals
     void equalsAndHashcode() {
         //given
-        HashMap<User, Integer> userMap = new HashMap<>();
+        HashMap<MutableUser, Integer> userMap = new HashMap<>();
 
         //when
         for (int i = 0; i < 100; i++) {
-            userMap.put(new User("Jacek" + i, "Kowalski"), i);
+            userMap.put(new MutableUser("Jacek" + i, "Kowalski"), i);
         }
 
         //then
@@ -37,40 +34,42 @@ public class JavaBasicsSpec {
     }
 
     @Test
-        // Zmien klasę User oraz sekcję 'when' tak aby test przechodził
+        // Zmien klasę MutableUser oraz sekcję 'when' tak aby test przechodził
         // Tip: setter
     void mutability() {
         //given
-        User user = new User("Jacek", "Kowalski");
+        MutableUser user = new MutableUser("Jacek", "Kowalski");
 
         //when
-//        user.setSurname("Placek");
+        user.setSurname("Placek");
 
         //then
-//         assertEquals("Jacek", user.getName());
-//         assertEquals("Placek", user.getSurname());
+        assertEquals("Jacek", user.getName());
+        assertEquals("Placek", user.getSurname());
     }
 
     @Test
         // Zmieniając sekcje 'when' spraw aby test przeszedł
+        // Tip: setter
     void mutabilityProblem() {
         //given
-        User user = new User("Jacek", "Kowalski");
-        UserManager userManager = new UserManager(user);
+        MutableUser user = new MutableUser("Jacek", "Kowalski");
+        MutableUserManager userManager = new MutableUserManager(user);
 
         //when
-//        user.setSurname("Placek");
+        user.setSurname("Placek");
 
         //then
-//        assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
+        assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
     }
 
     @Test
-        // Zmien klasę User tak aby test przechodził
+        // Zmien klasę ImmutableUser tak aby test przechodził
+        // Tip: final keyword
     void immutability() {
         //given
-        User user = new User("Jacek", "Kowalski");
-        UserManager userManager = new UserManager(user);
+        ImmutableUser user = new ImmutableUser("Jacek", "Kowalski");
+        ImmutableUserManager userManager = new ImmutableUserManager(user);
 
         //when
         setNameUsingMagic(user);
@@ -82,13 +81,14 @@ public class JavaBasicsSpec {
     @Test
         // Zmien sekcję 'when' tak aby test przechodził
         // Pamiętaj, że pola klasy są już niemutowalne
+        // Top: operator new
     void editImmutableField() {
         //given
-        User user = new User("Jacek", "Kowalski");
-        UserManager userManager;
+        ImmutableUser user = new ImmutableUser("Jacek", "Kowalski");
+        ImmutableUserManager userManager;
 
         //when
-        userManager = new UserManager(new User(user.getName(), "Placek"));
+        userManager = new ImmutableUserManager(new ImmutableUser(user.getName(), "Placek"));
 
         //then
         assertEquals("Hello!, I'm Jacek Placek", userManager.introduceUser());
@@ -121,9 +121,9 @@ public class JavaBasicsSpec {
         assertEquals("You cast a spell on an offer: offer-id", platformFacade.doMagicWithOffer(admin, "offer-id"));
     }
 
-    private void setNameUsingMagic(User user) {
+    private void setNameUsingMagic(ImmutableUser user) {
         try {
-            Field privateField = User.class.getDeclaredField("surname");
+            Field privateField = ImmutableUser.class.getDeclaredField("surname");
 
             if ((privateField.getModifiers() & Modifier.FINAL) == Modifier.FINAL) {
                 return;
