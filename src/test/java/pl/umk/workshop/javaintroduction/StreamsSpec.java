@@ -180,6 +180,7 @@ public class StreamsSpec {
     }
 
     public static boolean isPrime(int number) {
-        return IntStream.rangeClosed(2, number/2).noneMatch(i -> number%i == 0);
+        if (number < 2) return false;
+        else return IntStream.rangeClosed(2, number/2).noneMatch(i -> number%i == 0);
     }
 }
