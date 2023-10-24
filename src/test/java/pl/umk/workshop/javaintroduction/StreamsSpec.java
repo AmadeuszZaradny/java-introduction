@@ -176,7 +176,7 @@ public class StreamsSpec {
                 .toList();
 
         //then
-        assertEquals(asList(2, 3, 5, 7, 11, 13, 17, 19), primeNumbers);
+        assertEquals(asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29), primeNumbers);
     }
 
     public static boolean isPrime(int number) {
