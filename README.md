@@ -2,11 +2,11 @@
 To repozytorium zawiera zestaw zadań, które pomogą Tobie zdobyć praktykę w korzystaniu z podstawowych, a zarazem bardzo przydatnych konstrukcji wykorzystywanych podczas programowania w języku Java.
 
 <h3 id="uruchomienie">Uruchomienie</h3>
-Projekt korzysta z ***java 17***. Aby skonfigurować używane JDK możesz skorzystać z [sdkman](https://sdkman.io/).
+Projekt korzysta z **java 21**. Aby skonfigurować używane JDK możesz skorzystać z [sdkman](https://sdkman.io/).
 
 1. Aby zobaczyć dostępne dystrybucje użyj komendy: `sdk list java`.
-2. Zainstaluj wybraną wersję java. *Przykładowe polecenie: `sdk install java 17.0.4-tem`*.
-3. Wskaż zainstalowaną wersję java. *Przykładowe polecenie: `sdk use java 17.0.4-tem`*.
+2. Zainstaluj wybraną wersję java. *Przykładowe polecenie: `sdk install java 21.0.2-open`*.
+3. Wskaż zainstalowaną wersję java. *Przykładowe polecenie: `sdk use java 21.0.2-open`*.
 
 Zanim przejdziesz do rozwiązywania zadań upewnij się, że Twoje środowisko pracy jest poprawnie skonfigurowane. Aby to zrobić uruchom komendę:
 ```
